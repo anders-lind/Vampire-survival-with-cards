@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] PlayerAbilities playerAbilities;
     [SerializeField] float speed = 4.0f;
+    Vector3 direction;
+    Vector3 previousDirection;
 
 
     // Update is called once per frame
@@ -34,32 +37,35 @@ public class PlayerController : MonoBehaviour
             movement += new Vector3(speed, 0, 0);
         }
 
+        // Apply movement
         this.transform.position += movement * Time.deltaTime;
+        
+        // Set direction
+        if (movement.magnitude != 0){
+            direction = movement.normalized;
+            previousDirection = direction;
+        }
+        else {
+            direction = previousDirection;
+        }
+        
 
 
         //// ORIENTATION ////
-        // UP
-        if (movement.y > 0){
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        // DOWN
-        if (movement.y < 0){
-            this.transform.rotation = Quaternion.Euler(0, 0, 180);
-        }
         // RIGHT
-        if (movement.x > 0){
-            this.transform.rotation = Quaternion.Euler(0, 0, -90);
+        if (direction.x > 0){
+            spriteRenderer.flipX = true;
         }
         // LEFT
-        if (movement.x < 0){
-            this.transform.rotation = Quaternion.Euler(0, 0, 90);
+        if (direction.x < 0){
+            spriteRenderer.flipX = false;
         }
 
 
         //// ABILITY ////
         if (Input.GetKeyDown(KeyCode.Space)){
             print("use");
-            playerAbilities.useAbility("magic orb");
+            playerAbilities.useAbility("magic orb", direction);
         }
     }
 }
