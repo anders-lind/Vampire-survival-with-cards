@@ -6,17 +6,26 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] PlayerAbilities playerAbilities;
-    [SerializeField] float speed;// = 4.0f;
-    //Vector3 direction;
+
+
+    [SerializeField] float speed; 
+    [SerializeField] int health;
+
     Vector3 previousDirection;
 
 
     // Update is called once per frame
     void Update()
     {
+        //// HEALTH /////
+        if (health <= 0){
+            Destroy(this.gameObject);
+        }
+
+
         //// DIRECTION ////
         Vector3 direction = Vector3.zero;
-        
+
         // UP
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow)){
             direction += new Vector3(0, 1, 0);
@@ -57,8 +66,14 @@ public class PlayerController : MonoBehaviour
 
         //// ABILITY ////
         if (Input.GetKeyDown(KeyCode.Space)){
-            print("use");
             playerAbilities.useAbility("magic orb", previousDirection);
         }
+    }
+
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        print(this.name + " health = " + health);
     }
 }

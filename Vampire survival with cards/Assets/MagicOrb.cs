@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class MagicOrb : MonoBehaviour
 {
-    [SerializeField] float speed = 8;
-    [SerializeField] float aliveTime = 3.0f;    // seconds
+    [SerializeField] float speed, aliveTime;
+    [SerializeField] int damage;
     
     float startTime;
 
 
     void Start()
     {
-        print("A");
         startTime = Time.time;
     }
 
@@ -27,6 +26,13 @@ public class MagicOrb : MonoBehaviour
         if (Time.time - startTime  > aliveTime){
             Destroy(this.gameObject);
         }
+    }
 
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy"){
+            other.GetComponent<Enemy>().takeDamage(damage);
+        }
     }
 }
