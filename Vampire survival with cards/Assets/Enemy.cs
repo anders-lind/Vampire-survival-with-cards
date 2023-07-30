@@ -28,12 +28,8 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-
-        //// DIRECTION ////
-        Vector3 direction = (player.transform.position - this.transform.position).normalized;
-
-
         //// MOVEMENT ////
+        Vector3 direction = (player.transform.position - this.transform.position).normalized;
         Vector3 movement = direction * walkSpeed * Time.deltaTime;
         this.transform.Translate(movement);
 
