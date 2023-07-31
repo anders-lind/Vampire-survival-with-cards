@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] PlayerAbilities playerAbilities;
+    [SerializeField] CardManager cardManager;
 
 
     [SerializeField] float speed; 
@@ -64,16 +65,46 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        //// CHOOSE CARD ////
+        if (Input.GetKeyDown("1"))
+            cardManager.setSelectedCard(0);
+        if (Input.GetKeyDown("2"))
+            cardManager.setSelectedCard(1);
+        if (Input.GetKeyDown("3"))
+            cardManager.setSelectedCard(2);
+        if (Input.GetKeyDown("4"))
+            cardManager.setSelectedCard(3);
+        if (Input.GetKeyDown("5"))
+            cardManager.setSelectedCard(4);
+        if (Input.GetKeyDown("6"))
+            cardManager.setSelectedCard(5);
+        if (Input.GetKeyDown("7"))
+            cardManager.setSelectedCard(6);
+        if (Input.GetKeyDown("8"))
+            cardManager.setSelectedCard(7);
+        if (Input.GetKeyDown("9"))
+            cardManager.setSelectedCard(8);
+        if (Input.GetKeyDown("0"))
+            cardManager.setSelectedCard(9);
+
+
         //// ABILITY ////
         if (Input.GetKeyDown(KeyCode.Space)){
-            playerAbilities.useAbility("magic orb", previousDirection);
+            // playerAbilities.useAbility(cardManager.getSelectedCard(), previousDirection);
+            cardManager.useSelectedCard();
+            cardManager.drawRandomCard();
         }
-    }
 
+    }
 
     public void takeDamage(int damage)
     {
         health -= damage;
-        print(this.name + " health = " + health);
+        // print(this.name + " health = " + health);
+    }
+
+    public Vector3 getPreviousDirection()
+    {
+        return previousDirection;
     }
 }
