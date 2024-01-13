@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] PlayerAbilities playerAbilities;
     [SerializeField] CardManager cardManager;
 
 
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow)){
             direction += new Vector3(1, 0, 0);
         }
-
+        // 
         if (direction.magnitude != 0){
             direction = direction.normalized;
             previousDirection = direction;
@@ -67,31 +66,35 @@ public class PlayerController : MonoBehaviour
 
         //// CHOOSE CARD ////
         if (Input.GetKeyDown("1"))
-            cardManager.setSelectedCard(0);
+            cardManager.selectCard(0);
         if (Input.GetKeyDown("2"))
-            cardManager.setSelectedCard(1);
+            cardManager.selectCard(1);
         if (Input.GetKeyDown("3"))
-            cardManager.setSelectedCard(2);
+            cardManager.selectCard(2);
         if (Input.GetKeyDown("4"))
-            cardManager.setSelectedCard(3);
+            cardManager.selectCard(3);
         if (Input.GetKeyDown("5"))
-            cardManager.setSelectedCard(4);
+            cardManager.selectCard(4);
         if (Input.GetKeyDown("6"))
-            cardManager.setSelectedCard(5);
+            cardManager.selectCard(5);
         if (Input.GetKeyDown("7"))
-            cardManager.setSelectedCard(6);
+            cardManager.selectCard(6);
         if (Input.GetKeyDown("8"))
-            cardManager.setSelectedCard(7);
+            cardManager.selectCard(7);
         if (Input.GetKeyDown("9"))
-            cardManager.setSelectedCard(8);
+            cardManager.selectCard(8);
         if (Input.GetKeyDown("0"))
-            cardManager.setSelectedCard(9);
+            cardManager.selectCard(9);
 
 
         //// ABILITY ////
         if (Input.GetKeyDown(KeyCode.Space)){
             // playerAbilities.useAbility(cardManager.getSelectedCard(), previousDirection);
             cardManager.useSelectedCard();
+        }
+    
+        //// DRAW CARD ////
+        if (Input.GetKeyDown(KeyCode.F)){
             cardManager.drawRandomCard();
         }
 
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int damage)
     {
         health -= damage;
-        // print(this.name + " health = " + health);
+        print(this.name + " health = " + health);
     }
 
     public Vector3 getPreviousDirection()
