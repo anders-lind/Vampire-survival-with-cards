@@ -7,13 +7,15 @@ public abstract class Card : MonoBehaviour
     public enum CardType
     {
         not_a_card = 0,
-        magic_orb = 1,
-        nr_of_cards = 2
+        magic_orb,
+        fireball,
+        nr_of_cards
     }
 
 
     protected GameObject player;
     protected PlayerController playerController;
+    protected GameObject projectilePrefab;
     public int totalUses = 1;
     public int usesLeft = 1;
 
@@ -23,7 +25,6 @@ public abstract class Card : MonoBehaviour
 
     void Awake()
     {
-        print("Awake");
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
     }
@@ -36,5 +37,15 @@ public abstract class Card : MonoBehaviour
     }
 
     public abstract void use();
+
+    public GameObject shootProjectile(float spread = 0f)
+    {
+        usesLeft -= 1;
+
+        Vector3 direction = playerController.getPreviousDirection();
+        Vector3 randomDirection = new Vector3(direction.x + Random.Range(-spread, spread), direction.y + Random.Range(-spread, spread));
+        
+        return Instantiate(projectilePrefab, player.transform.position + randomDirection*0.5f, Quaternion.FromToRotation(Vector3.up, randomDirection));
+    }
 
 }

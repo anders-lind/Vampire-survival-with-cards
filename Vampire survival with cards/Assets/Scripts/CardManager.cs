@@ -11,6 +11,7 @@ public class CardManager : MonoBehaviour
 
     //// Abilities ////
     [SerializeField] GameObject cardMagicOrbPrefab;
+    [SerializeField] GameObject cardFireballPrefab;
 
 
     //// Card variables ////
@@ -44,14 +45,14 @@ public class CardManager : MonoBehaviour
 
     public void drawRandomCard()
     {
-        print("drawRandomCard");
-
         int max = (int)Card.CardType.nr_of_cards;
         int cardNr = Random.Range(1,max);
         GameObject drawnCard;
         
         if (cardNr == (int) Card.CardType.magic_orb)
             drawnCard = GameObject.Instantiate(cardMagicOrbPrefab);
+        else if (cardNr == (int) Card.CardType.fireball)
+            drawnCard = GameObject.Instantiate(cardFireballPrefab);
         else {
             print("Invalid card nr: " + cardNr);
             return;
@@ -84,7 +85,6 @@ public class CardManager : MonoBehaviour
             return;
         }
             
-        print("Selected Card " + selection);
         selectedCard = selection;
         
         // Update selection visually

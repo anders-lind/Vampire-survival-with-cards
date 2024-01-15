@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: -2712391680363150162}
   - component: {fileID: 1330764477251612571}
   - component: {fileID: -2438162902995126608}
-  - component: {fileID: 4014553528673397062}
+  - component: {fileID: -3986201138568702454}
   m_Layer: 0
-  m_Name: magic orb
+  m_Name: fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 138d578a2f818b64dbbca2be1f35383d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd608670b5f414d49adff4023d4030a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4014553528673397062
+--- !u!114 &-3986201138568702454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4621225459290936260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef88bf9deb0e4d24a979d7ee14a29867, type: 3}
+  m_Script: {fileID: 11500000, guid: 62420e1b3a0767e4097787c74ef5deb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1979114035884310472}
   - component: {fileID: 2825591410736470680}
-  - component: {fileID: 6763012731704923413}
+  - component: {fileID: 1256223349234764927}
   m_Layer: 0
-  m_Name: card with magic orb
+  m_Name: card with fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: e623c058139a9874e9eeea83a883eac8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16583aaab88394349a840dc80c22f0e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6763012731704923413
+--- !u!114 &1256223349234764927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7092326206853141989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b651451c058d9439ce68d9725f2679, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e215a7667d9c3640a172008d91b92ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalUses: 1
+  totalUses: 2
   usesLeft: 1
-  magicOrbPrefab: {fileID: 4621225459290936260, guid: 6bff37066ba5c2c42abaf53b82178d39, type: 3}
-  randomSpread: 0.3
+  fireballPrefab: {fileID: 4621225459290936260, guid: 61bc1b902a643d147b564687988b1f11, type: 3}
