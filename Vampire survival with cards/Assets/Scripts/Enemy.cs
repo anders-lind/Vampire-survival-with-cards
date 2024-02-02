@@ -5,18 +5,27 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    float walkSpeed, attackCooldown, timeAtLastAttack;
+    float walkSpeed = 1, attackCooldown = 1;
+    float damageFlashDuration = 0.1f;
 
     [SerializeField]
-    int health, attack;
+    int health = 1, attack = 1;
+
+    float timeAtLastAttack = 0;
+    float damageFlashStartTime = 0;
+    bool damageFlashing = false;
+
+    Color damagedFlashColor = new Color(0.8f, 0f, 0f);
 
     SpriteRenderer spriteRenderer;
     GameObject player;
+    PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
@@ -25,7 +34,7 @@ public class Enemy : MonoBehaviour
     {
         //// HEALTH ////
         if (health <= 0){
-            Destroy(this.gameObject);
+            Die();
         }
 
         //// MOVEMENT ////
@@ -43,13 +52,37 @@ public class Enemy : MonoBehaviour
         if (direction.x < 0){
             spriteRenderer.flipX = false;
         }
+
+        //// Damage color flash ////
+        if (damageFlashing){
+            if (Time.time - damageFlashStartTime >= damageFlashDuration) {
+                spriteRenderer.color = Color.white;
+            }
+
+        }
+        
     }
 
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
-        print(this.name + " health = " + health);
+
+        beginDamageFlash();
+
+        if (health <= 0){
+            Die();
+        }
+    }
+
+    private void beginDamageFlash()
+    {
+        
+        damageFlashing = true;
+
+        damageFlashStartTime = Time.time;
+
+        spriteRenderer.color = damagedFlashColor;
     }
 
 
@@ -62,8 +95,13 @@ public class Enemy : MonoBehaviour
             if (other.gameObject.tag == "Player"){
                 timeAtLastAttack = Time.time;
                 other.GetComponent<PlayerController>().takeDamage(attack);
+            }   
         }
-        }
-        
+    }
+
+    void Die()
+    {
+        playerController.gainExperiance(1);
+        Destroy(this.gameObject);
     }
 }

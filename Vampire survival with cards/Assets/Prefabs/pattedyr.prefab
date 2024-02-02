@@ -101,9 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 0.8
   attackCooldown: 2
-  timeAtLastAttack: 0
+  damageFlashDuration: 0.1
   health: 10
-  attack: 2
+  attack: 0
 --- !u!61 &6720144434110509286
 BoxCollider2D:
   m_ObjectHideFlags: 0

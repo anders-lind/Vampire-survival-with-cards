@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float speed; 
     [SerializeField] int health;
+    [SerializeField] int experiance;
 
     Vector3 previousDirection;
 
@@ -104,6 +105,11 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         print(this.name + " health = " + health);
+    }
+
+    public void gainExperiance(int exp)
+    {
+        this.experiance += exp;
     }
 
     public Vector3 getPreviousDirection()

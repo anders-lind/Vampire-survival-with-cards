@@ -29,7 +29,7 @@ public class ProjectileSpell : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy"){
-            other.GetComponent<Enemy>().takeDamage(damage);
+            other.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 }
