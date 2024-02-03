@@ -100,8 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 1
-  attackCooldown: 1
-  damageFlashDuration: 0.2
+  attackCooldown: 0.25
   health: 10
   attack: 1
 --- !u!61 &3287962505091992612

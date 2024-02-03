@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         //// HEALTH /////
         if (health <= 0){
-            Destroy(this.gameObject);
+            die();
         }
 
 
@@ -120,8 +120,11 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int damage)
     {
         health -= damage;
-        print(this.name + " health = " + health);
         beginDamageFlash();
+
+        if (health <= 0){
+            die();
+        }
     }
 
     public void gainExperiance(int exp)
@@ -140,5 +143,10 @@ public class PlayerController : MonoBehaviour
         damageFlashing = true;
         damageFlashStartTime = Time.time;
         spriteRenderer.color = damageFlashColor;
+    }
+
+    private void die()
+    {
+
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    float walkSpeed = 1, attackCooldown = 1;
+    float walkSpeed = 1, attackCooldown = 0.5f;
     float damageFlashDuration = 0.1f;
 
     [SerializeField]
@@ -91,10 +91,10 @@ public class Enemy : MonoBehaviour
         if (isDead){
             return;
         }
-        float timeSinceLastAttack = Time.time - timeAtLastAttack;
 
+        //// Attack ////
+        float timeSinceLastAttack = Time.time - timeAtLastAttack;
         if (timeSinceLastAttack >= attackCooldown){
-            
             if (other.gameObject.tag == "Player"){
                 timeAtLastAttack = Time.time;
                 other.GetComponent<PlayerController>().takeDamage(attack);
