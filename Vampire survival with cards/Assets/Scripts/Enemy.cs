@@ -14,8 +14,10 @@ public class Enemy : MonoBehaviour
     float timeAtLastAttack = 0;
     float damageFlashStartTime = 0;
     bool damageFlashing = false;
+    bool isDead = false;
 
-    Color damagedFlashColor = new Color(0.8f, 0f, 0f);
+    Color damageFlashColor = new Color(0.8f, 0f, 0f);
+    Color deadColor = new Color(0.2f, 0.2f, 0.2f);
 
     SpriteRenderer spriteRenderer;
     GameObject player;
@@ -32,6 +34,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead){
+            return;
+        }
         //// HEALTH ////
         if (health <= 0){
             Die();
@@ -58,9 +63,7 @@ public class Enemy : MonoBehaviour
             if (Time.time - damageFlashStartTime >= damageFlashDuration) {
                 spriteRenderer.color = Color.white;
             }
-
         }
-        
     }
 
 
@@ -77,17 +80,17 @@ public class Enemy : MonoBehaviour
 
     private void beginDamageFlash()
     {
-        
         damageFlashing = true;
-
         damageFlashStartTime = Time.time;
-
-        spriteRenderer.color = damagedFlashColor;
+        spriteRenderer.color = damageFlashColor;
     }
 
 
     void OnTriggerStay2D(Collider2D other)
     {
+        if (isDead){
+            return;
+        }
         float timeSinceLastAttack = Time.time - timeAtLastAttack;
 
         if (timeSinceLastAttack >= attackCooldown){
@@ -101,7 +104,9 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        isDead = true;
         playerController.gainExperiance(1);
-        Destroy(this.gameObject);
+        spriteRenderer.color = deadColor;
+        // Destroy(this.gameObject);
     }
 }

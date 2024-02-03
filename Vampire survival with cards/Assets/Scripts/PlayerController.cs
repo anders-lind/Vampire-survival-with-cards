@@ -10,9 +10,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float speed; 
     [SerializeField] int health;
-    [SerializeField] int experiance;
+    float damageFlashDuration = 0.1f;
+
+
+    [SerializeField] private int experiance;
+
+    Color damageFlashColor = new Color(0.8f, 0, 0);
 
     Vector3 previousDirection;
+    private bool damageFlashing;
+    private float damageFlashStartTime;
+    
 
 
     // Update is called once per frame
@@ -21,6 +29,14 @@ public class PlayerController : MonoBehaviour
         //// HEALTH /////
         if (health <= 0){
             Destroy(this.gameObject);
+        }
+
+
+        //// Damage color flash ////
+        if (damageFlashing){
+            if (Time.time - damageFlashStartTime >= damageFlashDuration) {
+                spriteRenderer.color = Color.white;
+            }
         }
 
 
@@ -105,15 +121,24 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         print(this.name + " health = " + health);
+        beginDamageFlash();
     }
 
     public void gainExperiance(int exp)
     {
-        this.experiance += exp;
+        experiance += exp;
+        print("exp=" + experiance);
     }
 
     public Vector3 getPreviousDirection()
     {
         return previousDirection;
+    }
+
+    private void beginDamageFlash()
+    {
+        damageFlashing = true;
+        damageFlashStartTime = Time.time;
+        spriteRenderer.color = damageFlashColor;
     }
 }
